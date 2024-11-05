@@ -9,7 +9,19 @@ namespace Inventory3
         // 입출고 내용 저장
         static void Process(int[] x)
         {
-
+            // 입고일 경우 x 는 input 배열을 받고 출고일경우는 output 배열과 연결된다
+            Console.Write("날짜를 입력하세요 (1~31)");
+            int day = int.Parse(Console.ReadLine()); // 날짜 입력
+            if (0 < day && day < 32) // 날짜 에러 체크
+            {
+                Console.Write("수량을 입력하세요");
+                 int qty = int.Parse(Console.ReadLine());
+                x[day - 1] += qty; // 일 번호 위치 배열에 수량을 저장한다
+            }
+            else
+            {
+                Console.WriteLine("잘못된 날짜 입력 입니다");
+            }
         }
         // 배열 x 의 합을 출력
         static void ShowSum(int[] x)
@@ -28,7 +40,7 @@ namespace Inventory3
         }
         static void Main(string[] args)
         {
-            int[] inpt = new int[31];
+            int[] input = new int[31];
             int[] output = new int[31];
             while (true)
             {
@@ -46,7 +58,7 @@ namespace Inventory3
                 {
                     case 1:
                         Console.WriteLine("** 입고처리");
-                        Process(inpt);
+                        Process(input);
                         break;
                     case 2:
                         Console.WriteLine("** 출고처리");
@@ -54,17 +66,17 @@ namespace Inventory3
                         break;
                     case 3:
                         Console.WriteLine("** 총 입고량은");
-                        ShowSum(inpt);
+                        ShowSum(input);
                         break;
                     case 4:
                         Console.WriteLine("** 총 출고량은");
                         ShowSum(output);
                         break;
                     case 5:
-                        ShowCurrentStock(inpt, output);
+                        ShowCurrentStock(input, output);
                         break;
                     case 6:
-                        ShowMonthHistory(inpt, output);
+                        ShowMonthHistory(input, output);
                         break;
                 }
             }           
